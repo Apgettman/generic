@@ -3,40 +3,52 @@ package transport;
 public class Main {
     public static void main(String[] args) {
 
-        Car bmw = new Car("БМВ", "760М", 6.0, 250);
-        System.out.println(bmw);
-        Bus mercedes = new Bus("Мерседес", "9906", 6.0, 180);
-        System.out.println(mercedes);
-        Truck man = new Truck("Ман", "TGS", 6.5, 160);
-        System.out.println(man);
+        Bus mercedes = new Bus("Mercedes", "9900", 4);
+        Bus volvo = new Bus("Volvo", "5890", 6);
+        Bus scania = new Bus("Scania", "7822", 5);
+        Bus tiger = new Bus("Tiger", "9800", 7);
+        mercedes.printInfo();
+        volvo.printInfo();
+        scania.printInfo();
+        tiger.printInfo();
 
-        Driver driverB = new Driver("Петров Петр Петрович,", "В/У кат.B,", 10);
+        Car mercedesSl = new Car("Mercedes", "SLS", 6.2);
+        Car audi = new Car("Audi", "RS6", 4.2);
+        Car ford = new Car("Ford", "GT", 6.0);
+        Car bmw = new Car("BMW", "760М", 6.0);
+        mercedesSl.printInfo();
+        audi.printInfo();
+        ford.printInfo();
+        bmw.printInfo();
+
+        Truck man = new Truck("MAN", "2312", 7.5);
+        Truck zil = new Truck("ZIL", "130", 5.5);
+        Truck kamaz = new Truck("KAMAZ", "3301", 6.3);
+        Truck gaz = new Truck("GAZ", "2213", 5.2);
+        man.printInfo();
+        zil.printInfo();
+        kamaz.printInfo();
+        gaz.printInfo();
+
+        Driver driverB = new Driver("Петров Петр Петрович,", "кат.B,", 11.5);
         System.out.println(driverB.getFio() + " " + driverB.getAvailabilityOfRights() + " Стаж "
-                + driverB.getExperience() + " лет! Управляет автомобилем: " + bmw + " и будет участвовать в заезде!");
-        driverB.сompeting(Car.CMD_PIT, Competing.getCompetingCommands);
-        chekCompeting(driverB, bmw);
-        driverB.refill();
+                + driverB.getExperience() + " лет! Управляет автомобилем: " + bmw.getBrand() + " и будет участвовать в заезде!");
 
-        Driver driverC = new Driver("Иванов Иван Иванович,", "В/У кат.С,", 15);
+        Driver driverC = new Driver("Иванов Иван Иванович,", "кат.С,", 15);
         System.out.println(driverC.getFio() + " " + driverC.getAvailabilityOfRights() + " Стаж "
-                + driverC.getExperience() + " лет! Управляет грузовиком: " + man + " и будет участвовать в заезде!");
-        driverC.сompeting(Truck.CMD_PIT, Competing.getCompetingCommands);
-        chekCompeting(driverC, man);
-        driverC.refill();
+                + driverC.getExperience() + " лет! Управляет грузовиком: " + man.getBrand() + " и будет участвовать в заезде!");
 
-        Driver driverD = new Driver("Васильев Василий Васильевич,", "В/У кат.Д,", 20);
+        Driver driverD = new Driver("Васильев Василий Васильевич,", "кат.Д,", 20);
         System.out.println(driverD.getFio() + " " + driverD.getAvailabilityOfRights() + " Стаж "
-                + driverD.getExperience() + " лет! Управляет автобусом: " + mercedes + " и будет участвовать в заезде!");
-        driverD.сompeting(Bus.CMD_PIT, Competing.getCompetingCommands);
-        chekCompeting(driverD, mercedes);
-        driverD.refill();
-    }
+                + driverD.getExperience() + " лет! Управляет автобусом: " + mercedes.getBrand() + " и будет участвовать в заезде!");
 
-    public static void chekCompeting(Competing... competings) {
-        for (Competing competing : competings) {
-            for (String command : competing.getAllCommands) {
-                competing.doCommand(command);
-            }
-        }
+        Driver<Truck> Sergey = new Driver<>("Смирнов Сергей Сергеевич", "кат.С,", 5);
+        Sergey.driveC(man);
+
+        Driver<Car> Andrey = new Driver<>("Андреев Андрей Андреевич", "кат.B,", 10);
+        Andrey.driveB(bmw);
+
+        Driver<Bus> Dima = new Driver<>("Дмитриев Дмитрий Васильевич", "кат.Д,", 7);
+        Dima.driveD(mercedes);
     }
 }
